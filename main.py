@@ -2,13 +2,23 @@ from app.commands.add_command import AddCommand
 from app.commands.subtract_command import SubtractCommand
 from app.plugin_loader import load_plugins
 from app.history_facade import HistoryFacade
+from app.logger_setup import setup_logging
+import logging
 
 def main():
     print("Welcome to the Calculator.")
     print("Type 'exit' to quit.")
+
     commands = [AddCommand(), SubtractCommand()] + load_plugins()
     command_map = {cmd.name(): cmd for cmd in commands}
     history = HistoryFacade()
+    setup_logging()
+    logger = logging.getLogger(__name__)
+    logger.info("Calculator started")
+    logger.info(f"Running command: {cmd_name} with args: {args}")
+    logger.warning(f"Unknown command: {cmd_name}")
+    logger.error(f"Error executing command: {e}")
+
 
     while True:
         raw_input = input("> ").strip()
