@@ -1,11 +1,10 @@
 from app.commands.add_command import AddCommand
 from app.commands.subtract_command import SubtractCommand
-from app.plugin_loader import load_plugins
 
 def main():
     print("Welcome to the Calculator.")
     print("Type 'exit' to quit.")
-    commands = [AddCommand(), SubtractCommand()] + load_plugins()
+    commands = [AddCommand(), SubtractCommand()]
     command_map = {cmd.name(): cmd for cmd in commands}
 
     while True:
