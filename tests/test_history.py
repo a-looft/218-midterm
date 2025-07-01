@@ -8,7 +8,6 @@ def test_history_add_save_load(tmp_path):
     history.add_record("add", ["1", "2"], 3.0)
     history.save()
 
-    # Reload and verify
     new_history = HistoryFacade(filepath=str(file))
     assert not new_history.df.empty
     assert new_history.df.iloc[0]["command"] == "add"
